@@ -24,9 +24,9 @@ if __name__ == '__main__':
     path = 'sample.pdf' 
     
     argParser = argparse.ArgumentParser(description='Parse the Genusswerk weekly menu')
-    argParser.add_argument('--file','-f')
-    argParser.add_argument('--debug','-d', action='store_true')
-    argParser.add_argument('--send-to-slack', '-s', action='store_true')
+    argParser.add_argument('--file','-f', help='The Genusswerk menu pdf you want to parse')
+    argParser.add_argument('--debug','-d', action='store_true', help='Show parsing debug information')
+    argParser.add_argument('--send-to-slack', '-s', action='store_true', help='Send parsed menu to slack')
     args = argParser.parse_args()
     
     if (args.file):

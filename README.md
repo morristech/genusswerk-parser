@@ -1,6 +1,6 @@
 # Genusswerk Menu Parser
 
-This is a small tool to parse the weekly menu of [the cantine next to my office](https://das-genusswerk.at/).
+This is a small tool to parse the weekly menu of [the canteen next to my office](https://das-genusswerk.at/).
 
 This is what a bored engineer does, after the joking question "Did you parse the PDF?" stays with him over the weekend.
 
