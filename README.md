@@ -27,5 +27,5 @@ Currently only prints the result
 
 Future Plans
 
-* Connect to a mail account to react to weekly newsletter
+* Put into a container in which it runs weekly or daily to notify of today's menu
 * Add Slack integration to post and allow querying of menu
