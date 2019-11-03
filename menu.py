@@ -21,10 +21,19 @@ class Day:
 class Week:
     
     def __init__(self):
-        self.menus = []
+        self.menus = [] 
 
-    def addNextDay(week, day):
-        week.menus.append(day)        
+    def addNextDay(self, day):
+        self.menus.append(day)
+
+    def getTodaysMenu(self):
+        from datetime import datetime
+        weekday = datetime.today().weekday()
+        if (weekday < 1 or weekday > 5):
+            print('Enjoy your weekend and cook for yourself!')
+            return
+        index = weekday-1
+        return self.menus[index]
 
     def __str__(self):
         output = ''
