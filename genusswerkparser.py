@@ -24,22 +24,23 @@ def handleMenu(path, useFullWeek=False, sendToSlack=False, notify=False, debug=F
     print(notification)
     
     if sendToSlack:
-       sendMenuToSlack(notification)
+       sendMenuToSlack(notification, debug)
 
     if notify:
         sendNotification(notification)
 
     menudownloader.cleanup()
 
-def sendMenuToSlack(text):
-    print('Slack integration not implemented yet')
+def sendMenuToSlack(text, debug):
     slackToken = os.environ["SLACK_API_TOKEN"]
     client = slack.WebClient(token=slackToken)
-#    for menu in week.menus:
-#        client.chat_postMessage(
-#            channel = "",
-#            text = text
-#        )
+
+    channel = os.environ["SLACK_CHANNEL"]
+
+    client.chat_postMessage(
+        channel = channel,         
+        text = text
+    )
 
 def sendNotification(text):
     subprocess.Popen(['notify-send', '-i', 'Genusswerk Menu', text])

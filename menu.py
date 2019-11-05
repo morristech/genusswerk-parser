@@ -9,11 +9,11 @@ class Day:
         self.menu3 = ''
 
     def __str__(self):
-        l1 = "Genusswerk Menu for " + self.date + ":\n"
-        l2 = "Soups: " + self.soup1 + " OR " + self.soup2 + "\n"
-        l3 = "Menu 1: " + self.menu1 + "\n"
-        l4 = "Menu 2: " + self.menu2 + "\n"
-        l5 = "Menu 3: " + self.menu3 + "\n"
+        l1 = "*Genusswerk Menu for " + self.date + ":*\n"
+        l2 = "*Soups:* " + self.soup1 + " OR " + self.soup2 + "\n"
+        l3 = "*Menu 1:* " + self.menu1 + "\n"
+        l4 = "*Menu 2:* " + self.menu2 + "\n"
+        l5 = "*Menu 3:* " + self.menu3 + "\n"
 
         return l1 + l2 + l3 + l4 + l5
 
