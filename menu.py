@@ -29,10 +29,10 @@ class Week:
     def getTodaysMenu(self):
         from datetime import datetime
         weekday = datetime.today().weekday()
-        if (weekday < 1 or weekday > 5):
+        if (weekday > 4):
             print('Enjoy your weekend and cook for yourself!')
             return
-        index = weekday-1
+        index = weekday
         return self.menus[index]
 
     def __str__(self):
