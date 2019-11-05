@@ -3,7 +3,7 @@ import menudownloader
 import argparse
 import pdf_table_parser as parser
 import os
-#import slack
+import slack
 import subprocess
 
 def handleMenu(path, useFullWeek=False, sendToSlack=False, notify=False, debug=False):
@@ -15,7 +15,7 @@ def handleMenu(path, useFullWeek=False, sendToSlack=False, notify=False, debug=F
         path = filename
 
     week = parser.parsePdfMenu(path, debug)
-    notification = str(week) if useFullWeek else week.getTodaysMenu()
+    notification = str(week) if useFullWeek else str(week.getTodaysMenu())
     
     if (notification == None):
         print('But you could view the current week menu with the -w flag')
@@ -33,8 +33,8 @@ def handleMenu(path, useFullWeek=False, sendToSlack=False, notify=False, debug=F
 
 def sendMenuToSlack(text):
     print('Slack integration not implemented yet')
-#   slackToken = os.environ["SLACK_API_TOKEN"]
-#   client = slack.WebClient(token=slackToken)
+    slackToken = os.environ["SLACK_API_TOKEN"]
+    client = slack.WebClient(token=slackToken)
 #    for menu in week.menus:
 #        client.chat_postMessage(
 #            channel = "",
