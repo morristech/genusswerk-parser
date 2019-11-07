@@ -1,0 +1,21 @@
+from python:3.7.5-slim-buster
+
+RUN apt-get update
+RUN apt-get install -y libgtk2.0-dev python3-tk ghostscript 
+
+RUN pip install camelot-py[cv] matplotlib slackclient
+
+RUN apt-get install -y cron
+
+RUN mkdir /tmp/genusswerkbot
+
+WORKDIR /usr/src/genusswerkbot
+COPY . .
+
+COPY gwp-cron-job /etc/cron.d/gwp-cron-job
+RUN chmod +x /etc/cron.d/gwp-cron-job
+RUN crontab /etc/cron.d/gwp-cron-job
+
+RUN touch /var/log/gwp-output
+
+CMD cron; tail -f /var/log/gwp-output

@@ -1,0 +1,2 @@
+0 9 * * 1-5 /usr/local/bin/python /usr/src/genusswerkbot/genusswerkparser.py -s >> /var/log/gwp-output 2>&1
+# Mo-Fr at 9:00
