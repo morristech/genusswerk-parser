@@ -3,7 +3,7 @@ from urllib.request import urlopen, Request
 from os import remove, path
 from glob import iglob
 
-fileTemplate = 'menu_cw{}.pdf'
+fileTemplate = '/tmp/genusswerkbot/menu_cw{}.pdf'
 
 def getYear():
     return datetime.today().strftime('%Y')

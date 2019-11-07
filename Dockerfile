@@ -5,6 +5,8 @@ RUN apt-get install -y libgtk2.0-dev python3-tk ghostscript
 
 RUN pip install camelot-py[cv] matplotlib slackclient
 
+RUN mkdir /tmp/genusswerkbot
+
 WORKDIR /usr/src/genusswerkbot
 COPY . .
 
