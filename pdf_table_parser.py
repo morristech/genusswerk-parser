@@ -3,11 +3,10 @@ import matplotlib.pyplot as plt
 import menu
 
 def parsePdfMenu(path, debug=False):
-    tables = camelot.read_pdf(path, flavor='stream', edge_tol=500, row_tol=50 , table_areas=['0,565,850,110'])
-    if (tables.n != 1):
+    table = getTable(path)
+    if (table == None ):
         return
-    table = tables[0]
-    
+
     if (debug):
         print(table)
         print(table.accuracy)
@@ -24,6 +23,21 @@ def parsePdfMenu(path, debug=False):
         week.addNextDay(day)
 
     return week
+
+def getTable(path, row_tol=50, attempts=0):
+    tables = camelot.read_pdf(path, flavor='stream', edge_tol=500, row_tol=row_tol , table_areas=['0,565,850,110'])
+    attempts += 1
+    if (tables.n != 1 or attempts > 5):
+        return
+
+    table = tables[0]
+
+    if (len(table.data) > 6):
+        return getTable(path, row_tol+10, attempts)
+    if (len(table.data) < 6):
+        return getTable(path, row_tol-10, attempts)
+
+    return table
 
 def cleanParsedRow(row):
     cleanRow = []
