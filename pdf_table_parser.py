@@ -17,6 +17,7 @@ def parsePdfMenu(path, debug=False):
     week = menu.Week()
     for row in table.data[1:]:
         if (len(row) != 6):
+            print(len(row)+"rows instead of six, aborting")
             return
         cleanRow = cleanParsedRow(row)
         day = parseMenuForDay(cleanRow)
