@@ -24,6 +24,9 @@ def expectedMenuUrl():
     return template.format(getYear(), getMonth(), getWeek())
 
 def downloadCurrentMenu(folder=defaultFolder):
+    if folder == None: 
+        folder = defaultFolder
+
     url = expectedMenuUrl()
     fileName = folder + weekMenuFilename()
 

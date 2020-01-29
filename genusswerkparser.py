@@ -6,9 +6,9 @@ import os
 import slack
 import subprocess
 
-def handleMenu(path, useFullWeek=False, sendToSlack=False, notify=False, debug=False):
+def handleMenu(path, directory, useFullWeek=False, sendToSlack=False, notify=False, debug=False):
     if (path == None):
-        success, filename = menudownloader.downloadCurrentMenu()
+        success, filename = menudownloader.downloadCurrentMenu(directory)
         if (success == False):
             print('Failed to download menu!')
             return
@@ -48,10 +48,11 @@ def sendNotification(text):
 if __name__ == '__main__':    
     argParser = argparse.ArgumentParser(description='Parse the Genusswerk weekly menu')
     argParser.add_argument('--file','-f', help='The Genusswerk menu pdf you want to parse')
+    argParser.add_argument('--directory', '-d', help='The folder downloaded menus will be stored in. Default is subfolder menu where run')
     argParser.add_argument('--week','-w', action='store_true', help='Return complete week, instead of todays menu')
     argParser.add_argument('--send-to-slack', '-s', action='store_true', help='Send parsed menu to slack')
     argParser.add_argument('--send-notification', '-n', action='store_true', help='Show parsed menu as notification')
-    argParser.add_argument('--debug','-d', action='store_true', help='Show parsing debug information')
+    argParser.add_argument('--debug','-db', action='store_true', help='Show parsing debug information')
     args = argParser.parse_args()
     
-    handleMenu(args.file, args.week, args.send_to_slack, args.send_notification, args.debug)
+    handleMenu(args.file, args.directory, args.week, args.send_to_slack, args.send_notification, args.debug)
