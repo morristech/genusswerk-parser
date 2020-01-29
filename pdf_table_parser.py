@@ -15,12 +15,16 @@ def parsePdfMenu(path, debug=False):
         plt.show()
     
     week = menu.Week()
+
+    price_info = parsePriceInfo(table.data[0:1])
+
     for row in table.data[1:]:
         if (len(row) != 6):
             print(len(row)+"rows instead of six, aborting")
             return
         cleanRow = cleanParsedRow(row)
         day = parseMenuForDay(cleanRow)
+        day.addPrices(price_info)
         week.addNextDay(day)
 
     return week
@@ -55,3 +59,11 @@ def parseMenuForDay(row):
     day.menu2 = row[4]
     day.menu3 = row[5]
     return day
+
+def parsePriceInfo(row):
+    prices = []
+    for price in cleanParsedRow(row[0])[2:]:
+        splitOnPrice = price.split(' € ')
+        if len(splitOnPrice) == 2: 
+            prices.append(splitOnPrice[1])
+    return prices

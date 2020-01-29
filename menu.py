@@ -8,14 +8,22 @@ class Day:
         self.menu2 = ''
         self.menu3 = ''
 
-    def __str__(self):
-        l1 = "*Genusswerk Menu for " + self.date + ":*\n"
-        l2 = "*Soups:* " + self.soup1 + " OR " + self.soup2 + "\n"
-        l3 = "*Menu 1:* " + self.menu1 + "\n"
-        l4 = "*Menu 2:* " + self.menu2 + "\n"
-        l5 = "*Menu 3:* " + self.menu3 + "\n"
+    def addPrices(self, priceList):
+        self.s2_price = priceList[0]
+        self.m1_price = priceList[1]
+        self.m2_price = priceList[2]
+        self.m3_price = priceList[3]
 
-        return l1 + l2 + l3 + l4 + l5
+
+    def __str__(self):
+        title = "*Genusswerk Menu for " + self.date + ":*\n"
+        s1 = "*Soup 1:* " + self.soup1 + "\n" 
+        s2 = "*Soup 2 (+" + self.s2_price + "€):* " + self.soup2 + "\n"
+        m1 = "*Menu 1 ("+self.m1_price+"€):* " + self.menu1 + "\n"
+        m2 = "*Menu 2 ("+self.m2_price+"€):* " + self.menu2 + "\n"
+        m3 = "*Menu 3 ("+self.m3_price+"€):* " + self.menu3 + "\n"
+
+        return title + s1 + s2 + m1 + m2 + m3
 
 
 class Week:
