@@ -2,8 +2,10 @@ from datetime import datetime
 from urllib.request import urlopen, Request
 from os import remove, path
 from glob import iglob
+from pathlib import Path
 
-fileTemplate = '/tmp/genusswerkbot/menu_cw{}.pdf'
+defaultFolder = './menus/'
+fileTemplate = 'menu_cw{}.pdf'
 
 def getYear():
     return datetime.today().strftime('%Y')
@@ -12,18 +14,18 @@ def getMonth():
     return datetime.today().strftime('%m')
 
 def getWeek():
-    return datetime.today().strftime('%V')
+    return datetime.today().strftime('%V').replace("0", "")
 
 def weekMenuFilename():
     return fileTemplate.format(getWeek())
 
 def expectedMenuUrl():
-    template = 'https://das-genusswerk.at/wp-content/uploads/{}/{}/Men%C3%BCplan-KW-{}-das-genusswerk.pdf'
+    template = 'https://das-genusswerk.at/wp-content/uploads/{}/{}/Men%C3%BCplan-KW-{}-das-Genusswerk.pdf'
     return template.format(getYear(), getMonth(), getWeek())
 
-def downloadCurrentMenu():
+def downloadCurrentMenu(folder=defaultFolder):
     url = expectedMenuUrl()
-    fileName = weekMenuFilename()
+    fileName = folder + weekMenuFilename()
 
     if (path.exists(fileName)):
         print('Using previously downloaded {}\n'.format(fileName))
@@ -34,6 +36,8 @@ def downloadCurrentMenu():
     userAgent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'
     request  = Request(url, headers={'User-Agent': userAgent})
     response = urlopen(request)
+
+    Path(folder).mkdir(parents=True, exist_ok=True)
     
     with open(fileName, 'wb') as pdf:
         pdf.write(response.read())
