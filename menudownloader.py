@@ -14,7 +14,10 @@ def getMonth():
     return datetime.today().strftime('%m')
 
 def getWeek():
-    return datetime.today().strftime('%V').replace("0", "")
+    week = datetime.today().strftime('%V')
+    if (int(week) < 10):
+        return week.replace("0", "")
+    return week
 
 def weekMenuFilename():
     return fileTemplate.format(getWeek())
